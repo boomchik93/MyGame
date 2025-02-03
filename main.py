@@ -11,10 +11,9 @@ WIDTH, HEIGHT = 1280, 720
 TEXT_COLOR = (0, 62, 151)
 SKY_BLUE = (135, 206, 235)
 WHITE = (255, 255, 255)
-BRONZE = (150, 81, 12)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Беги, или проиграешь")
+pygame.display.set_caption("БоксДжампер")
 clock = pygame.time.Clock()
 
 pygame.mixer.music.load("music.mp3")
@@ -29,6 +28,7 @@ conn.commit()
 
 button_img = pygame.image.load("button.png").convert_alpha()
 button_img = pygame.transform.scale(button_img, (250, 100))
+
 
 
 def save_score(score, level):
@@ -171,21 +171,21 @@ class Bird(pygame.sprite.Sprite):
 def show_high_scores():
     background_image = pygame.image.load("background.png").convert()
     level_data = [
-        ('beginner', 'Начальный', (BRONZE, WIDTH // 6)),
-        ('normal', 'Обычный', (BRONZE, WIDTH // 2)),
-        ('expert', 'Эксперт', (BRONZE, WIDTH - WIDTH // 6))
+        ('beginner', 'Начальный', (TEXT_COLOR, WIDTH // 6)),
+        ('normal', 'Обычный', (TEXT_COLOR, WIDTH // 2)),
+        ('expert', 'Эксперт', (TEXT_COLOR, WIDTH - WIDTH // 6))
     ]
 
     while True:
         screen.blit(background_image, (0, 0))
 
-        pygame.draw.line(screen, BRONZE, (WIDTH // 3, 100), (WIDTH // 3, HEIGHT - 50), 2)
-        pygame.draw.line(screen, BRONZE, (WIDTH * 2 // 3, 100), (WIDTH * 2 // 3, HEIGHT - 50), 2)
+        pygame.draw.line(screen, TEXT_COLOR, (WIDTH // 3, 100), (WIDTH // 3, HEIGHT - 50), 2)
+        pygame.draw.line(screen, TEXT_COLOR, (WIDTH * 2 // 3, 100), (WIDTH * 2 // 3, HEIGHT - 50), 2)
 
         font_title = pygame.font.SysFont("Arial", 50, bold=True)
         font_scores = pygame.font.SysFont("Arial", 40)
 
-        title = font_title.render("Топ 5 рекордов", True, BRONZE)
+        title = font_title.render("Топ 5 рекордов", True, TEXT_COLOR)
         screen.blit(title, (WIDTH // 2 - title.get_width() // 2, 30))
 
         for level, name, (color, x_pos) in level_data:
@@ -289,7 +289,7 @@ def game_loop(fps, box_spawn_interval, level):
 
         while running_game:
             current_time = int(time.time() - start_time)
-            time_text = font.render(f"Время: {current_time}", True, BRONZE)
+            time_text = font.render(f"Время: {current_time}", True, TEXT_COLOR)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -322,7 +322,7 @@ def game_loop(fps, box_spawn_interval, level):
             if background_x < 0:
                 screen.blit(background_image, (background_x + background_width, 0))
 
-            score_text = font.render(f"Счёт: {score}", True, BRONZE)
+            score_text = font.render(f"Счёт: {score}", True, TEXT_COLOR)
             screen.blit(score_text, (20, 20))
             screen.blit(time_text, (WIDTH - time_text.get_width() - 20, 20))
 
@@ -351,7 +351,7 @@ def main_menu():
     while True:
         screen.blit(background_image, (0, 0))
         font = pygame.font.Font(None, 108)
-        title = font.render("Беги, или проиграешь", True, TEXT_COLOR)
+        title = font.render("БоксДжампер", True, TEXT_COLOR)
         screen.blit(title, (WIDTH // 2 - title.get_width() // 2, 50))
 
         btn_rects = []
